@@ -393,6 +393,16 @@ var main = (function () {
         if (this.typeSimulator) {
             var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : ""));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
+            const imgg = document.getElementById('img');
+
+            // Load the model.
+            mobilenet.load().then(model => {
+              // Classify the image.
+              model.classify(imgg).then(predictions => {
+                console.log('Predictions: ');
+                console.log(predictions);
+              });
+            });
         }
     };
 
