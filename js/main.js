@@ -391,13 +391,8 @@ var main = (function () {
         this.output.textContent = "";
         this.prompt.textContent = "";
         if (this.typeSimulator) {
-            var result = "\n\n" + configs.getInstance().general_help + "\n\n";
-            for (var cmd in cmds) {
-                result += cmds[cmd].value + " - " + cmds[cmd].help + "\n";
-            }
-            var result_string = (configs.getInstance().welcome + result + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : ""));
+            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : ""));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
-            //this.type(result_string, function () { this.unlock(); }.bind(this), true);
         }
     };
 
