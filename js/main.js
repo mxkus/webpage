@@ -252,7 +252,13 @@ var main = (function () {
             elem.disabled = false;
         });
         scrollToBottom();
-        this.focus();
+        if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            // some code..
+           }
+        else {
+            this.focus();
+        }
+        
     };
 
     Terminal.prototype.handleFill = function () {
