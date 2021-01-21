@@ -391,8 +391,7 @@ var main = (function () {
         this.output.textContent = "";
         this.prompt.textContent = "";
         if (this.typeSimulator) {
-            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : ""));
-            this.type(result_string, function () { this.unlock(); }.bind(this), false);
+
             const imgg = document.getElementById('img');
 
             // Load the model.
@@ -403,6 +402,9 @@ var main = (function () {
                 console.log(predictions);
               });
             });
+            
+            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(predictions));
+            this.type(result_string, function () { this.unlock(); }.bind(this), false);
         }
     };
 
