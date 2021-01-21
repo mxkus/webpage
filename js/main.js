@@ -398,12 +398,11 @@ var main = (function () {
             mobilenet.load().then(model => {
               // Classify the image.
               model.classify(imgg).then(predictions => {
-                console.log('Predictions: ');
-                console.log(predictions);
+                var preds = predictions;
               });
             });
             
-            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(predictions));
+            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(preds));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
         }
     };
