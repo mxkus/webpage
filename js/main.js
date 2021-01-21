@@ -251,13 +251,9 @@ var main = (function () {
         this.sidenavElements.forEach(function (elem) {
             elem.disabled = false;
         });
+        
+        this.focus();
         scrollToBottom();
-        if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            // some code..
-           }
-        else {
-            this.focus();
-        }
         
     };
 
