@@ -21,7 +21,7 @@ var configs = (function () {
         cv_help: "Print cv",
         clear_help: "Clear the terminal screen.",
         reboot_help: "Reboot the system.",
-        welcome: "Welcome!\nType 'help' for a list of commands or use the more user-friendly colored sidenav at your left.\nIn order to skip text rolling, double click/touch anywhere.",
+        welcome: "Welcome!\nType 'help' for a list of commands.\nIn order to skip text rolling, double click/touch anywhere.",
         internet_explorer_warning: "NOTE: I see you're using internet explorer, this website won't work properly.",
         welcome_file_name: "welcome_message.txt",
         invalid_command_message: "<value>: command not found.",
