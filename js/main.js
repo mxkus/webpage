@@ -390,7 +390,6 @@ var main = (function () {
     Terminal.prototype.reset = function () {
         this.output.textContent = "";
         this.prompt.textContent = "";
-        this.prompt.preds = "";
         if (this.typeSimulator) {
 
             const imgg = document.getElementById('img');
@@ -400,7 +399,7 @@ var main = (function () {
             mobilenet.load().then(model => {
               // Classify the image.
               model.classify(imgg).then(predictions => {
-                this.prompt.preds = predictions
+                this.prompt.preds = predictions;
               });
             });
             
