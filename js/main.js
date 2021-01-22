@@ -364,7 +364,7 @@ var main = (function () {
             this.type(result, this.unlock.bind(this))
         }
         catch (e) {
-            this.type("Sorry, this did not work :(", this.unlock.bind(this))
+            this.type("Sorry, this did not work :( -> " + e, this.unlock.bind(this))
         }
     };
 
