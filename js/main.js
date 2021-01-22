@@ -395,15 +395,10 @@ var main = (function () {
             const imgg = document.getElementById('img');
 
             // Load the model.
-            var preds = ""
-            mobilenet.load().then(model => {
-              // Classify the image.
-              model.classify(imgg).then(predictions => {
-                this.prompt.preds = predictions;
-              });
-            });
+            const model = await mobilenet.load()
+            const preds = await model.classify(img)
             
-            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(this.prompt.preds));
+            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(preds));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
         }
     };
