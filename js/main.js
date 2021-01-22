@@ -310,7 +310,7 @@ var main = (function () {
                 client.onreadystatechange = function() {
                 alert(client.responseText);
                 }
-                text = client.responseText;
+                var text = client.responseText;
                 this.type(text.substring(10, 100), this.unlock.bind(this));
                 break;
             case cmds.CLASSIFY.value:
