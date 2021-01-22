@@ -302,15 +302,10 @@ var main = (function () {
         this.lock();
         switch (cmdComponents[0]) {
             case "predict":
-                if (cmdComponents.length > 1){
-                    var imgSrc = cmdComponents[1]
-                }
-                else {
-                    var imgSrc = "img/avatar.png"
-                }
+                var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "img/avatar.png"
                 
                 var image = document.createElement('img');
-                image.src = "https://i.imgur.com/hrlI34w.jpeg";
+                image.src = imgSrc;
                 image.id = "asdasd"
                 image.style = "display: none";
                 image.crossOrigin = "anonymous";
