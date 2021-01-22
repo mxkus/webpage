@@ -400,12 +400,13 @@ var main = (function () {
                 const predictions = await model.classify(img)
                 
                 console.log(predictions)
+                console.log(predictions)
                 return predictions
             }
 
             console.log(classifyImg(img))
             
-            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(predictionResult));
+            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : ""));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
         }
     };
