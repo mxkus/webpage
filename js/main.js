@@ -305,9 +305,8 @@ var main = (function () {
         this.lock();
         switch (cmdComponents[0]) {
             case "merkel":
-                var client = new XMLHttpRequest();
-                client.open('GET', '/merkel.txt');
-                var text = client.responseText;
+                var merkel = await fetch("/merkel.txt")
+                var text = await merkel.text()
                 this.type(text.substring(10, 100), this.unlock.bind(this));
                 break;
             case cmds.CLASSIFY.value:
