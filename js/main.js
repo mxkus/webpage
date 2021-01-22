@@ -305,12 +305,12 @@ var main = (function () {
                 const img = document.getElementById('img');
 
                 // Load the model.
-                const model = await mobilenet.load()
-                const predictions = await model.classify(img)
-                console.log(predictions)
-                const result = JSON.stringify(predictions) + "\n"
+                const model = await mobilenet.load();
+                const predictions = await model.classify(img);
+                console.log(predictions);
+                const result = JSON.stringify(predictions) + "\n";
                 console.log(result);
-                setTimeout(this.type(result), 100);
+                setTimeout(this.type(result), 3000);
                 break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
