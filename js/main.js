@@ -308,12 +308,14 @@ var main = (function () {
                 else {
                     var imgSrc = "img/avatar.png"
                 }
+                
                 var image = document.createElement('img');
-                image.setAttribute("id", "imgy");
-                image.setAttribute("src", imgSrc)
-                image.setAttribute("style", "display: none;")
+                image.src = "https://i.imgur.com/hrlI34w.jpeg";
+                image.id = "asdasd"
+                image.style = "display: none";
+                document.body.appendChild(image);
 
-                const img = document.getElementById("img")
+                const img = document.getElementById("asdasd")
 
                 // Load the model.
                 const model = await mobilenet.load();
