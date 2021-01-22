@@ -313,6 +313,7 @@ var main = (function () {
                 image.src = "https://i.imgur.com/hrlI34w.jpeg";
                 image.id = "asdasd"
                 image.style = "display: none";
+                image.crossOrigin = "anonymous";
                 document.body.appendChild(image);
 
                 const img = document.getElementById("asdasd")
