@@ -364,7 +364,7 @@ var main = (function () {
             this.type(result, this.unlock.bind(this))
         }
         catch (e) {
-            this.type("Sorry, this did not work :( probably, the image was blocked or not found", this.unlock.bind(this))
+            this.type("Sorry, this did not work :( probably, the image was blocked or not found. Hit F12 and navigate to the console if you want to know more about it.", this.unlock.bind(this))
         }
     };
 
