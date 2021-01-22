@@ -317,7 +317,7 @@ var main = (function () {
                 const model = await mobilenet.load();
                 const predictions = await model.classify(img);
                 console.log(predictions);
-                const result = JSON.stringify(predictions);
+                const result = predictions.map(pred => pred.className.split(",")[0] + ": "+ pred.probability).join("\n");
                 document.body.removeChild(image);
                 this.type(result, this.unlock.bind(this))
                 break;
