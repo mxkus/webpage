@@ -310,6 +310,7 @@ var main = (function () {
                 var text = await merkel.text()
                 var model = await qna.load()
                 var answers = await model.findAnswers(question, text);
+                console.log(answers)
                 this.type(JSON.stringify(answers), this.unlock.bind(this));
                 break;
             case cmds.CLASSIFY.value:
