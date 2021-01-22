@@ -308,6 +308,7 @@ var main = (function () {
                 const model = await mobilenet.load()
                 const predictions = await model.classify(img)
                 const result = JSON.stringify(predictions) + "\n"
+                console.log(result);
                 setTimeout(this.type(result), 100);
                 break;
             case cmds.CAT.value:
