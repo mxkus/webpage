@@ -402,7 +402,7 @@ var main = (function () {
                 console.log(predictions)
                 return predictions
             }
-            preds = classifyImg(img)
+            var preds = classifyImg(img)
             
             var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(preds));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
