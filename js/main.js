@@ -399,12 +399,10 @@ var main = (function () {
                 const model = await mobilenet.load()
                 const predictions = await model.classify(img)
                 
-                console.log(predictions)
                 return predictions
             }
-            var preds = classifyImg(img)
             
-            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(preds));
+            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(classifyImg(imgg)));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
         }
     };
