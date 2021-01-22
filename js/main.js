@@ -395,10 +395,11 @@ var main = (function () {
             const imgg = document.getElementById('img');
 
             // Load the model.
-            var preds = mobilenet.load().then(model => {
+            var preds = ""
+            mobilenet.load().then(model => {
               // Classify the image.
               model.classify(imgg).then(predictions => {
-                return predictions;
+                preds = predictions;
               });
             });
             
