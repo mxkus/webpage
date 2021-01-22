@@ -397,7 +397,7 @@ var main = (function () {
             // Load the model.
             var preds = mobilenet.load().then(model => {
               // Classify the image.
-              return model.classify(imgg).then(predictions => {
+              model.classify(imgg).then(predictions => {
                 return predictions;
               });
             });
