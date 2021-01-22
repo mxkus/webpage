@@ -310,7 +310,8 @@ var main = (function () {
                     const predictions = await model.classify(img)
                     return predictions
                 }
-                classifyImg(img).then(pred => this.type(JSON.stringify(pred)));
+                var result = JSON.stringify(classifyImg);
+                this.type(result);
                 break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
