@@ -305,12 +305,12 @@ var main = (function () {
         this.lock();
         switch (cmdComponents[0]) {
             case "merkel":
+                var question = this.cmdLine.value.trim().split(" ").slice(1).join(" ")
                 var merkel = await fetch("/merkel.txt")
                 var text = await merkel.text()
                 var model = await qna.load()
-                var answers = await model.findAnswers("Who is Angela Merkel?", text);
-                console.log(answers);
-                this.type("answers in console", this.unlock.bind(this));
+                var answers = await model.findAnswers(question, text);
+                this.type(answers, this.unlock.bind(this));
                 break;
             case cmds.CLASSIFY.value:
                 this.classify(cmdComponents);
