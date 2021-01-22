@@ -303,10 +303,10 @@ var main = (function () {
         switch (cmdComponents[0]) {
             case "predict":
                 if (cmdComponents.length > 1){
-                    imgSrc = cmdComponents[1]
+                    var imgSrc = cmdComponents[1]
                 }
                 else {
-                    imgSrc = "img/avatar.png"
+                    var imgSrc = "img/avatar.png"
                 }
                 var image = document.createElement('img');
                 image.setAttribute("id", "img");
