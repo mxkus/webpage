@@ -302,13 +302,17 @@ var main = (function () {
         this.lock();
         switch (cmdComponents[0]) {
             case "predict":
+                img = document.createElement('img');
+                img.setAttribute("id", "img");
+                img.setAttribute("src", "img/avatar.png")
+                img.setAttribute("style", "display: none;")
                 const img = document.getElementById('img');
 
                 // Load the model.
                 const model = await mobilenet.load();
                 const predictions = await model.classify(img);
                 console.log(predictions);
-                const result = JSON.stringify(predictions) + "\n";
+                const result = JSON.stringify(predictions);
                 this.type(result, this.unlock.bind(this))
                 break;
             case cmds.CAT.value:
