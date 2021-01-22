@@ -390,6 +390,7 @@ var main = (function () {
     Terminal.prototype.reset = function () {
         this.output.textContent = "";
         this.prompt.textContent = "";
+        this.prompt.preds = "";
         if (this.typeSimulator) {
 
             const imgg = document.getElementById('img');
@@ -399,11 +400,11 @@ var main = (function () {
             mobilenet.load().then(model => {
               // Classify the image.
               model.classify(imgg).then(predictions => {
-                this.type(JSON.stringify(predictions))
+                this.prompt.preds = predictions
               });
             });
             
-            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(preds));
+            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(this.prompt.preds));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
         }
     };
