@@ -309,7 +309,7 @@ var main = (function () {
                 const predictions = await model.classify(img);
                 console.log(predictions);
                 const result = JSON.stringify(predictions) + "\n";
-                this.cat(["cat", "cv.txt"]);
+                this.type(result, this.unlock.bind(this))
                 break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
