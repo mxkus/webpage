@@ -307,9 +307,8 @@ var main = (function () {
             case "merkel":
                 var merkel = await fetch("/merkel.txt")
                 var text = await merkel.text()
-                console.log(text)
                 var model = await qna.load()
-                var answers = await model.findAnswers("Who is Angela Merkel?", "Angela Merkel is the German chancellor.");
+                var answers = await model.findAnswers("Who is Angela Merkel?", text);
                 console.log(answers);
                 this.type("answers in console", this.unlock.bind(this));
                 break;
