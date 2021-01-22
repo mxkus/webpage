@@ -302,10 +302,10 @@ var main = (function () {
         this.lock();
         switch (cmdComponents[0]) {
             case "predict":
-                img = document.createElement('img');
-                img.setAttribute("id", "img");
-                img.setAttribute("src", "img/avatar.png")
-                img.setAttribute("style", "display: none;")
+                var image = document.createElement('img');
+                image.setAttribute("id", "img");
+                image.setAttribute("src", "img/avatar.png")
+                image.setAttribute("style", "display: none;")
                 const img = document.getElementById('img');
 
                 // Load the model.
