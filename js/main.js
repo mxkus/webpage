@@ -313,9 +313,11 @@ var main = (function () {
                 image.setAttribute("src", imgSrc)
                 image.setAttribute("style", "display: none;")
 
+                const img = document.getElementById("img")
+
                 // Load the model.
                 const model = await mobilenet.load();
-                const predictions = await model.classify(image);
+                const predictions = await model.classify(img);
                 console.log(predictions);
                 const result = JSON.stringify(predictions);
                 this.type(result, this.unlock.bind(this))
