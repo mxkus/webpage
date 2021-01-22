@@ -308,7 +308,6 @@ var main = (function () {
                 const model = await mobilenet.load();
                 const predictions = await model.classify(img);
                 console.log(predictions);
-                console.log(result);
                 const result = JSON.stringify(predictions) + "\n";
                 this.cat(["cat", "cv.txt"]);
                 break;
