@@ -392,15 +392,18 @@ var main = (function () {
         this.prompt.textContent = "";
         if (this.typeSimulator) {
 
-            const imgg = document.getElementById('img');
+            const img = document.getElementById('img');
 
             // Load the model.
-            let predictionResult
-            mobilenet.load().then(model => {
-                model.classify(imgg).then(predictions => {
-                    predictionResult = predictions
-                });
-            });
+            const classifyImg = async (img) => {
+                const model = await mobilenet.load()
+                const predictions = await model.classify(img)
+                
+                console.log(predictions)
+                return predictions
+            }
+
+            console.log(classifyImg(img))
             
             var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(predictionResult));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
