@@ -308,10 +308,9 @@ var main = (function () {
                 const classifyImg = async (img) => {
                     const model = await mobilenet.load()
                     const predictions = await model.classify(img)
-                    this.type(JSON.stringify(predictions))
                     return predictions
                 }
-                console.log(classifyImg(img))
+                classifyImg(img).then(this.type)
                 break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
