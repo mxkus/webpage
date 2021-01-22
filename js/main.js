@@ -307,7 +307,9 @@ var main = (function () {
             case "merkel":
                 var merkel = await fetch("/merkel.txt")
                 var text = await merkel.text()
-                this.type(text.substring(10, 100), this.unlock.bind(this));
+                var model = await qna.load()
+                var answers = await model.findAnswers("Who is Angela Merkel?", text)
+                this.type(answers, this.unlock.bind(this));
                 break;
             case cmds.CLASSIFY.value:
                 this.classify(cmdComponents);
