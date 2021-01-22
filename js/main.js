@@ -305,12 +305,9 @@ var main = (function () {
                 const img = document.getElementById('img');
 
                 // Load the model.
-                const classifyImg = async (img) => {
-                    const model = await mobilenet.load()
-                    const predictions = await model.classify(img)
-                    return predictions
-                }
-                var result = await classifyImg(img);
+                const model = await mobilenet.load()
+                const predictions = await model.classify(img)
+                const result = JSON.stringify(predictions)
                 this.type(result);
                 break;
             case cmds.CAT.value:
