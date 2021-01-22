@@ -307,7 +307,7 @@ var main = (function () {
                 // Load the model.
                 const model = await mobilenet.load()
                 const predictions = await model.classify(img)
-                const result = JSON.stringify(predictions)
+                const result = JSON.stringify(predictions) + "\n"
                 this.type(result);
                 break;
             case cmds.CAT.value:
