@@ -302,24 +302,29 @@ var main = (function () {
         this.lock();
         switch (cmdComponents[0]) {
             case "predict":
-                var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "img/avatar.png"
-                
-                var image = document.createElement('img');
-                image.src = imgSrc;
-                image.id = "asdasd"
-                image.style = "display: none";
-                image.crossOrigin = "anonymous";
-                document.body.appendChild(image);
+                try {
+                    var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "img/avatar.png"
+                    var image = document.createElement('img');
+                    image.src = imgSrc;
+                    image.id = "asdasd"
+                    image.style = "display: none";
+                    image.crossOrigin = "anonymous";
+                    document.body.appendChild(image);
+    
+                    const img = document.getElementById("asdasd")
+    
+                    // Load the model.
+                    const model = await mobilenet.load();
+                    const predictions = await model.classify(img);
+                    console.log(predictions);
+                    const result = predictions.map(pred => pred.className.split(",")[0] + ": "+ pred.probability.toFixed(4)).join("\n");
+                    document.body.removeChild(image);
+                    this.type(result, this.unlock.bind(this))
+                }
+                catch (e) {
+                    this.type("Sorry, this did not work :(", this.unlock.bind(this))
+                }
 
-                const img = document.getElementById("asdasd")
-
-                // Load the model.
-                const model = await mobilenet.load();
-                const predictions = await model.classify(img);
-                console.log(predictions);
-                const result = predictions.map(pred => pred.className.split(",")[0] + ": "+ pred.probability.toFixed(4)).join("\n");
-                document.body.removeChild(image);
-                this.type(result, this.unlock.bind(this))
                 break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
