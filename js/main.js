@@ -398,9 +398,6 @@ var main = (function () {
             const classifyImg = async (img) => {
                 const model = await mobilenet.load()
                 const predictions = await model.classify(img)
-                
-                console.log(predictions)
-                console.log(predictions)
                 return predictions
             }
 
