@@ -307,6 +307,7 @@ var main = (function () {
                 // Load the model.
                 const model = await mobilenet.load()
                 const predictions = await model.classify(img)
+                console.log(predictions)
                 const result = JSON.stringify(predictions) + "\n"
                 console.log(result);
                 setTimeout(this.type(result), 100);
