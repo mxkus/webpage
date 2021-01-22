@@ -296,7 +296,7 @@ var main = (function () {
         }
     };
 
-    Terminal.prototype.handleCmd = function () {
+    Terminal.prototype.handleCmd = async function () {
         var cmdComponents = this.cmdLine.value.trim().split(" ");
         console.log(cmdComponents);
         this.lock();
@@ -310,7 +310,7 @@ var main = (function () {
                     const predictions = await model.classify(img)
                     return predictions
                 }
-                var result = JSON.stringify(classifyImg(img));
+                var result = await classifyImg(img);
                 this.type(result);
                 break;
             case cmds.CAT.value:
