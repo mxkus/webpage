@@ -309,10 +309,10 @@ var main = (function () {
                     var imgSrc = "img/avatar.png"
                 }
                 var image = document.createElement('img');
-                image.setAttribute("id", "img");
+                image.setAttribute("id", "imgy");
                 image.setAttribute("src", imgSrc)
                 image.setAttribute("style", "display: none;")
-                const img = document.getElementById('img');
+                const img = document.getElementById('imgy');
 
                 // Load the model.
                 const model = await mobilenet.load();
