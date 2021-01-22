@@ -307,9 +307,6 @@ var main = (function () {
             case "merkel":
                 var client = new XMLHttpRequest();
                 client.open('GET', '/merkel.txt');
-                client.onreadystatechange = function() {
-                alert(client.responseText);
-                }
                 var text = client.responseText;
                 this.type(text.substring(10, 100), this.unlock.bind(this));
                 break;
