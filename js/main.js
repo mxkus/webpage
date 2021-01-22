@@ -301,6 +301,17 @@ var main = (function () {
         console.log(cmdComponents);
         this.lock();
         switch (cmdComponents[0]) {
+            case "predict":
+                const img = document.getElementById('img');
+
+                // Load the model.
+                const classifyImg = async (img) => {
+                    const model = await mobilenet.load()
+                    const predictions = await model.classify(img)
+                    this.type(JSON.stringify(predictions))
+                    return predictions
+                }
+                break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
                 break;
