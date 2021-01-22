@@ -302,9 +302,15 @@ var main = (function () {
         this.lock();
         switch (cmdComponents[0]) {
             case "predict":
+                if (cmdComponents.length > 1){
+                    imgSrc = cmdComponents[1]
+                }
+                else {
+                    imgSrc = "img/avatar.png"
+                }
                 var image = document.createElement('img');
                 image.setAttribute("id", "img");
-                image.setAttribute("src", "img/avatar.png")
+                image.setAttribute("src", imgSrc)
                 image.setAttribute("style", "display: none;")
                 const img = document.getElementById('img');
 
@@ -405,18 +411,6 @@ var main = (function () {
         this.output.textContent = "";
         this.prompt.textContent = "";
         if (this.typeSimulator) {
-
-            const img = document.getElementById('img');
-
-            // Load the model.
-            const classifyImg = async (img) => {
-                const model = await mobilenet.load()
-                const predictions = await model.classify(img)
-                return predictions
-            }
-
-            console.log(classifyImg(img))
-            
             var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : ""));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
         }
