@@ -308,7 +308,7 @@ var main = (function () {
                 const model = await mobilenet.load()
                 const predictions = await model.classify(img)
                 const result = JSON.stringify(predictions) + "\n"
-                this.type(result);
+                setTimeout(this.type(result), 100);
                 break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
@@ -341,8 +341,6 @@ var main = (function () {
                 this.invalidCommand(cmdComponents);
                 break;
         };
-        scrollToBottom();
-        this.focus()
     };
 
     Terminal.prototype.cat = function (cmdComponents) {
