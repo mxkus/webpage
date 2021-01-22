@@ -310,7 +310,6 @@ var main = (function () {
                 console.log(predictions);
                 const result = JSON.stringify(predictions) + "\n";
                 console.log(result);
-                setTimeout(this.type(result), 3000);
                 break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
