@@ -395,8 +395,14 @@ var main = (function () {
             const imgg = document.getElementById('img');
 
             // Load the model.
-            const model = await mobilenet.load()
-            const preds = await model.classify(img)
+            const classifyImg = async (img) => {
+                const model = await mobilenet.load()
+                const predictions = await model.classify(img)
+                
+                console.log(predictions)
+                return predictions
+            }
+            preds = classifyImg(img)
             
             var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(preds));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
