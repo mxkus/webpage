@@ -395,14 +395,14 @@ var main = (function () {
             const imgg = document.getElementById('img');
 
             // Load the model.
-            const classifyImg = async (img) => {
-                const model = await mobilenet.load()
-                const predictions = await model.classify(img)
-                
-                return predictions
-            }
+            let predictionResult
+            mobilenet.load().then(model => {
+                model.classify(imgg).then(predictions => {
+                    predictionResult = predictions
+                });
+            });
             
-            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(classifyImg(imgg)));
+            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : "") + JSON.stringify(predictionResult));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
         }
     };
