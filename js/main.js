@@ -399,7 +399,7 @@ var main = (function () {
             mobilenet.load().then(model => {
               // Classify the image.
               model.classify(imgg).then(predictions => {
-                preds = predictions;
+                this.type(JSON.stringify(predictions))
               });
             });
             
