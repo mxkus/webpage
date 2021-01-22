@@ -404,7 +404,7 @@ var main = (function () {
                 return predictions
             }
 
-            console.log(classifyImg)
+            console.log(classifyImg(img))
             
             var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : ""));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
