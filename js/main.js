@@ -19,6 +19,7 @@ var configs = (function () {
         date_help: "Print the system date and time.",
         help_help: "Print this menu.",
         cv_help: "Print cv",
+        classify_help: "Classify an image with classify IMGURL",
         clear_help: "Clear the terminal screen.",
         reboot_help: "Reboot the system.",
         welcome: "Welcome!\nType 'help' for a list of commands.\nIn order to skip text rolling, double click/touch anywhere.",
@@ -120,6 +121,8 @@ var main = (function () {
         HELP: { value: "help", help: configs.getInstance().help_help },
         CLEAR: { value: "clear", help: configs.getInstance().clear_help },
         REBOOT: { value: "reboot", help: configs.getInstance().reboot_help },
+        PREDICT: { value: "predict", help: configs.getInstance().classify_help },
+        CLASSIFY: { value: "classify", help: configs.getInstance().classify_help },
     };
 
     var Terminal = function (prompt, cmdLine, output, sidenav, profilePic, user, host, root, outputTimer) {
@@ -301,30 +304,11 @@ var main = (function () {
         console.log(cmdComponents);
         this.lock();
         switch (cmdComponents[0]) {
-            case "predict":
-                try {
-                    var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "img/avatar.png"
-                    var image = document.createElement('img');
-                    image.src = imgSrc;
-                    image.id = "asdasd"
-                    image.style = "display: none";
-                    image.crossOrigin = "anonymous";
-                    document.body.appendChild(image);
-    
-                    const img = document.getElementById("asdasd")
-    
-                    // Load the model.
-                    const model = await mobilenet.load();
-                    const predictions = await model.classify(img);
-                    console.log(predictions);
-                    const result = predictions.map(pred => pred.className.split(",")[0] + ": "+ pred.probability.toFixed(4)).join("\n");
-                    document.body.removeChild(image);
-                    this.type(result, this.unlock.bind(this))
-                }
-                catch (e) {
-                    this.type("Sorry, this did not work :(", this.unlock.bind(this))
-                }
-
+            case cmds.CLASSIFY.value:
+                this.classify(cmdComponents);
+                break;
+            case cmds.PREDICT.value:
+                this.classify(cmdComponents);
                 break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
@@ -357,6 +341,31 @@ var main = (function () {
                 this.invalidCommand(cmdComponents);
                 break;
         };
+    };
+
+    Terminal.prototype.classify = async function (cmdComponents) {
+        try {
+            var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "img/avatar.png"
+            var image = document.createElement('img');
+            image.src = imgSrc;
+            image.id = "asdasd"
+            image.style = "display: none";
+            image.crossOrigin = "anonymous";
+            document.body.appendChild(image);
+
+            const img = document.getElementById("asdasd")
+
+            // Load the model.
+            const model = await mobilenet.load();
+            const predictions = await model.classify(img);
+            console.log(predictions);
+            const result = predictions.map(pred => pred.className.split(",")[0] + ": "+ pred.probability.toFixed(4)).join("\n");
+            document.body.removeChild(image);
+            this.type(result, this.unlock.bind(this))
+        }
+        catch (e) {
+            this.type("Sorry, this did not work :(", this.unlock.bind(this))
+        }
     };
 
     Terminal.prototype.cat = function (cmdComponents) {
