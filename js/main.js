@@ -304,6 +304,15 @@ var main = (function () {
         console.log(cmdComponents);
         this.lock();
         switch (cmdComponents[0]) {
+            case "merkel":
+                var client = new XMLHttpRequest();
+                client.open('GET', '/merkel.txt');
+                client.onreadystatechange = function() {
+                alert(client.responseText);
+                }
+                text = client.responseText;
+                this.type(text.substring(10, 100), this.unlock.bind(this));
+                break;
             case cmds.CLASSIFY.value:
                 this.classify(cmdComponents);
                 break;
