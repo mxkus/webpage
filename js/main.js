@@ -311,6 +311,7 @@ var main = (function () {
                     this.type(JSON.stringify(predictions))
                     return predictions
                 }
+                console.log(classifyImg(img))
                 break;
             case cmds.CAT.value:
                 this.cat(cmdComponents);
