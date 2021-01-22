@@ -341,6 +341,8 @@ var main = (function () {
                 this.invalidCommand(cmdComponents);
                 break;
         };
+        scrollToBottom();
+        this.focus()
     };
 
     Terminal.prototype.cat = function (cmdComponents) {
@@ -456,13 +458,7 @@ var main = (function () {
             skipped = true;
         }
         document.addEventListener("dblclick", skip);
-    function sleep(milliseconds) {
-      const date = Date.now();
-      let currentDate = null;
-      do {
-        currentDate = Date.now();
-      } while (currentDate - date < milliseconds);
-    }
+
         (function typer() {
             if (i < text.length) {
                 var char = text.charAt(i);
