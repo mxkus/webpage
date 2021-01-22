@@ -319,6 +319,12 @@ var main = (function () {
             case "resume":
                 this.cat(["cat", "cv.txt"]);
                 break;
+            case "maxi":
+                this.type("Yep, that's me :-).", this.unlock.bind(this));
+                break;
+            case "alina":
+                this.type("Blocked by DSGVO.", this.unlock.bind(this));
+                break;
             case cmds.LS.value:
                 this.ls();
                 break;
