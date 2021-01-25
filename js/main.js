@@ -340,7 +340,7 @@ var main = (function () {
                 fetch(url)
                     .then(res => res.json())
                     .then((out) => {
-                        this.type(out, this.unlock.bind(this));
+                        this.type(JSON.stringify(out), this.unlock.bind(this));
                     });
                 break;
             case "maxi":
