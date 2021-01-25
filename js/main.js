@@ -65,7 +65,9 @@ var files = (function () {
     Singleton.defaultOptions = {
         "about.txt": "This website was made using only pure JavaScript with no extra libraries.\nThe base template is from: https://github.com/luisbraganca/fake-terminal-website/",
         "contact.txt": "maximilian.kusterer@gmail.com",
-        "cv.txt": 'Maximilian Kusterer\nmaximilian.kusterer@gmail.com\nwww.linkedin.com/in/mkusterer\n\nSports, programming, current affairs\n\nProgramming languages: Python, Scala\n\n12/2020 – today\nEnBW AG, Karlsruhe\nData Engineer \n\n01/2018 – 11/2020\ndataqube GmbH, Karlsruhe\nData Scientist\n\n06/2017 – 11/2017\nTelecooperation Office (KIT), Karlsruhe\nResearch assistant for smart data analytics\n\n11/2013 – 07/2016\nFraunhofer ISI, Karlsruhe\nResearch assistant for energy technologies and systems'  };
+        "sports.txt": "Sports which I do on a regular basis:\nSummer: Beach volleyball, roundnet, mountainbiking, climbing outdoors, soccer\nWinter: Skiing, langlauf, climbing indoors, strength training",
+        "books.txt": "Here's an uncomplete list of books which I enjoyed or am still enjoying:\nRobert Musil - Der Mann ohne Eigenschaften\nChimamanda Ngozi Adichie - Americanah\nGeorge Orwell - 1984\nAldous Huxley - Brave New World\nNoah Gordon - Der Medicus\nYuval Noah Harari - Eine kurze Geschichte der Menschheit\nDaniel Kehlmann - Die Vermessung der Welt\nHermann Hesse - Siddartha\nCixin Liu - Die drei Sonnen\n",
+        "cv.txt": 'Maximilian Kusterer\nmaximilian.kusterer@gmail.com\nwww.linkedin.com/in/mkusterer\n\nSports, programming, books, cooking, current affairs\n\nProgramming languages: Python, Scala\n\n12/2020 – today\nEnBW AG, Karlsruhe\nData Engineer \n\n01/2018 – 11/2020\ndataqube GmbH, Karlsruhe\nData Scientist\n\n06/2017 – 11/2017\nTelecooperation Office (KIT), Karlsruhe\nResearch assistant for smart data analytics\n\n11/2013 – 07/2016\nFraunhofer ISI, Karlsruhe\nResearch assistant for energy technologies and systems'  };
     return {
         getInstance: function (options) {
             instance === void 0 && (instance = new Singleton(options));
@@ -360,7 +362,7 @@ var main = (function () {
 
     Terminal.prototype.classify = async function (cmdComponents) {
         try {
-            var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "img/avatar.png"
+            var imgSrc = (cmdComponents.length > 1) ? "https://cors-anywhere.herokuapp.com/" + cmdComponents[1] : "img/avatar.png"
             var image = document.createElement('img');
             image.src = imgSrc;
             image.id = "asdasd"
