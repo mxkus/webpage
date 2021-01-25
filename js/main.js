@@ -331,10 +331,12 @@ var main = (function () {
                 this.cat(["cat", "cv.txt"]);
                 break;
             case "energy":
-                var split = this.cmdLine.value.trim().split(" ").slice(1)
-                var date = split[0]
-                var country = split[1]
+                var split = cmdComponents.slice(1)
+                console.log(split)
+                let date = split[0]
+                let country = split[1]
                 var url = `https://mkusterer.de/api/?date=${date}&country=${country}`
+                console.log(url)
                 fetch(url)
                     .then(res => res.json())
                     .then((out) => {
