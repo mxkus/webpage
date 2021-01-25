@@ -330,6 +330,17 @@ var main = (function () {
             case "resume":
                 this.cat(["cat", "cv.txt"]);
                 break;
+            case "energy":
+                var split = this.cmdLine.value.trim().split(" ").slice(1)
+                var date = split[0]
+                var country = split[1]
+                var url = `https://mkusterer.de/api/?date=${date}&country=${country}`
+                fetch(url)
+                    .then(res => res.json())
+                    .then((out) => {
+                        this.type(out, this.unlock.bind(this));
+                    });
+                break;
             case "maxi":
                 this.type("Yep, that's me :-).", this.unlock.bind(this));
                 break;
