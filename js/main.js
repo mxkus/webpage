@@ -3,6 +3,19 @@
 /**
  * Configs
  */
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('');
+}
 var configs = (function () {
     var instance;
     var Singleton = function (options) {
@@ -335,6 +348,7 @@ var main = (function () {
                 console.log(split)
                 let date = split[0]
                 let country = split[1]
+                if (date <= formatDate(new Date())) {
                 var url = `https://mkusterer.de/api/?date=${date}&country=${country}`
                 console.log(url)
                 fetch(url)
@@ -342,6 +356,10 @@ var main = (function () {
                     .then((out) => {
                         this.type(JSON.stringify(out), this.unlock.bind(this));
                     });
+                }
+                else {
+                    this.type("Date is in the future. This functionality has not been implemented yet.", this.unlock.bind(this));
+                }
                 break;
             case "maxi":
                 this.type("Yep, that's me :-).", this.unlock.bind(this));
