@@ -26,7 +26,7 @@ var configs = (function () {
         }
     };
     Singleton.defaultOptions = {
-        general_help: "Here's a list of commands that you can use.\nYou can use autocomplete by pressing the TAB key.",
+        general_help: "Here's a list of commands that you can use.\nYou can use autocomplete by pressing the TAB key.\nYou can get your last command by pressing the ARROW UP key.",
         ls_help: "List information about the files and folders (the current directory by default).",
         cat_help: "Read FILE(s) content and print it to the standard output (screen).",
         whoami_help: "Print the user name associated with the current effective user ID and more info.",
@@ -204,8 +204,8 @@ var main = (function () {
             } else if (event.which === 9 || event.keyCode === 9) {
                 this.handleFill();
                 ignoreEvent(event);
-            } else if ((event.which === 38 || event.keyCode === 38) && (document.getElementById("cmdline").value == "")) {
-                document.getElementById("cmdline").value += lastCommand;
+            } else if (event.which === 38 || event.keyCode === 38) {
+                document.getElementById("cmdline").value = lastCommand;
                 ignoreEvent(event);
             }
         }.bind(this));
