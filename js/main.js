@@ -33,6 +33,7 @@ var configs = (function () {
         date_help: "Print the system date and time.",
         help_help: "Print this menu.",
         energy_help: "Get net energy production by typing 'energy COUNTRYCODE DATE', e.g. 'energy DE 20210101'",
+        energyplot_help: "Get net energy production plotted by typing 'energyplot COUNTRYCODE DATE', e.g. 'energyplot DE 20210101'",
         cv_help: "Print cv",
         classify_help: "Classify an image with 'classify' or 'predict', e.g. 'classify https://i.imgur.com/yrQjfxN.jpg'",
         clear_help: "Clear the terminal screen.",
@@ -136,6 +137,7 @@ var main = (function () {
         WHOAMI: { value: "whoami", help: configs.getInstance().whoami_help },
         DATE: { value: "date", help: configs.getInstance().date_help },
         ENERGY: { value: "energy", help: configs.getInstance().energy_help },
+        ENERGYPLOT: { value: "energyplot", help: configs.getInstance().energyplot_help },
         HELP: { value: "help", help: configs.getInstance().help_help },
         CLEAR: { value: "clear", help: configs.getInstance().clear_help },
         REBOOT: { value: "reboot", help: configs.getInstance().reboot_help },
@@ -353,8 +355,8 @@ var main = (function () {
             case "energy":
                 var split = cmdComponents.slice(1)
                 console.log(split)
-                let date = split[1]
-                let country = split[0]
+                var date = split[1]
+                var country = split[0]
                 if (date <= formatDate(new Date())) {
                 var url = `https://mkusterer.de/api/?date=${date}&country=${country}`
                 console.log(url)
@@ -372,10 +374,10 @@ var main = (function () {
                 case "energyplot":
                     var split = cmdComponents.slice(1)
                     console.log(split)
-                    let datee = split[1]
-                    let countryy = split[0]
-                    if (datee <= formatDate(new Date())) {
-                        var url = `https://mkusterer.de/api/?date=${datee}&country=${countryy}&plot=true`
+                    var date = split[1]
+                    var country = split[0]
+                    if (date <= formatDate(new Date())) {
+                        var url = `https://mkusterer.de/api/?date=${date}&country=${country}&plot=true`
                         console.log(url)
                         fetch(url)
                             .then(res => res.json())
