@@ -3,6 +3,7 @@
 /**
  * Configs
  */
+var lastCommand = ""
 function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -201,6 +202,9 @@ var main = (function () {
             } else if (event.which === 9 || event.keyCode === 9) {
                 this.handleFill();
                 ignoreEvent(event);
+            } else if ((event.which === 38 || event.keyCode === 38) && (document.getElementById("cmdline").value == "")) {
+                document.getElementById("cmdline") += lastCommand;
+                ignoreEvent(event);
             }
         }.bind(this));
         this.reset();
@@ -318,6 +322,7 @@ var main = (function () {
 
     Terminal.prototype.handleCmd = async function () {
         var cmdComponents = this.cmdLine.value.trim().split(" ");
+        lastCommand = this.cmdLine.value.trim()
         console.log(cmdComponents);
         this.lock();
         switch (cmdComponents[0]) {
