@@ -70,6 +70,7 @@ var configs = (function () {
 /**
  * Your files here
  */
+var otherSideNavElements = [{"name": "kugele-simulation.de", "url": "http://kugele-simulation.de"}]
 var files = (function () {
     var instance;
     var Singleton = function (options) {
@@ -237,6 +238,25 @@ var main = (function () {
                 this.handleCmd();
             }.bind(this, file);
             element.appendChild(document.createTextNode(capFirst(file.replace(/\.[^/.]+$/, "").replace(/_/g, " "))));
+            this.sidenav.appendChild(element);
+            this.sidenavElements.push(element);
+        }
+
+        var element = document.createElement("p");
+        Terminal.makeElementDisappear(element);
+        element.appendChild(document.createTextNode(capFirst("external links (leave the terminal)")));
+        this.sidenav.appendChild(element);
+        this.sidenavElements.push(element);
+
+        for (var index in otherSideNavElements) {
+            var sidenavElement = otherSideNavElements[index]
+            var element = document.createElement("button");
+            Terminal.makeElementDisappear(element);
+            element.onclick = function (sidenavElement, event) {
+                this.handleSidenav(event);
+                window.location = sidenavElement.url;
+            }.bind(this, sidenavElement);
+            element.appendChild(document.createTextNode(capFirst(sidenavElement.name)));
             this.sidenav.appendChild(element);
             this.sidenavElements.push(element);
         }
