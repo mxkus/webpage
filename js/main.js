@@ -374,8 +374,7 @@ var main = (function () {
                     console.log(url)
                     fetch(url)
                         .then((outJson) => {
-                            var outFormatted = Object.keys(outJson).map(key => key + ": " + outJson[key]).join("\n")
-                            this.type(outFormatted, this.unlock.bind(this));
+                            this.type(outJson, this.unlock.bind(this));
                         });
                     }
                     else {
