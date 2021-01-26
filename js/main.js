@@ -367,10 +367,10 @@ var main = (function () {
                 case "energyplot":
                     var split = cmdComponents.slice(1)
                     console.log(split)
-                    let date = split[1]
+                    let datee = split[1]
                     let country = split[0]
-                    if (date <= formatDate(new Date())) {
-                    var url = `https://mkusterer.de/api/?date=${date}&country=${country}&plot=true`
+                    if (datee <= formatDate(new Date())) {
+                    var url = `https://mkusterer.de/api/?date=${datee}&country=${country}&plot=true`
                     console.log(url)
                     fetch(url)
                         .then(res => res.json())
