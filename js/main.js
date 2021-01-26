@@ -31,6 +31,7 @@ var configs = (function () {
         whoami_help: "Print the user name associated with the current effective user ID and more info.",
         date_help: "Print the system date and time.",
         help_help: "Print this menu.",
+        energy_help: "Get net energy production by typing 'energy COUNTRYCODE DATE', e.g. 'energy DE 20210101'",
         cv_help: "Print cv",
         classify_help: "Classify an image with 'classify IMGURL' or 'predict IMGURL'",
         clear_help: "Clear the terminal screen.",
@@ -133,6 +134,7 @@ var main = (function () {
         RESUME: { value: "resume", help: configs.getInstance().cv_help },
         WHOAMI: { value: "whoami", help: configs.getInstance().whoami_help },
         DATE: { value: "date", help: configs.getInstance().date_help },
+        ENERGY: { value: "energy", help: configs.getInstance().energy_help },
         HELP: { value: "help", help: configs.getInstance().help_help },
         CLEAR: { value: "clear", help: configs.getInstance().clear_help },
         REBOOT: { value: "reboot", help: configs.getInstance().reboot_help },
@@ -346,15 +348,16 @@ var main = (function () {
             case "energy":
                 var split = cmdComponents.slice(1)
                 console.log(split)
-                let date = split[0]
-                let country = split[1]
+                let date = split[1]
+                let country = split[0]
                 if (date <= formatDate(new Date())) {
                 var url = `https://mkusterer.de/api/?date=${date}&country=${country}`
                 console.log(url)
                 fetch(url)
                     .then(res => res.json())
-                    .then((out) => {
-                        this.type(JSON.stringify(out), this.unlock.bind(this));
+                    .then((outJson) => {
+                        var outFormatted = Object.keys(outJson).map(key => key + ": " + outJson[key]).join("\n")
+                        this.type(outFormatted, this.unlock.bind(this));
                     });
                 }
                 else {
