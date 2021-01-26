@@ -370,12 +370,13 @@ var main = (function () {
                     let datee = split[1]
                     let countryy = split[0]
                     if (datee <= formatDate(new Date())) {
-                    var url = `https://mkusterer.de/api/?date=${datee}&country=${countryy}&plot=true`
-                    console.log(url)
-                    fetch(url)
-                        .then((outJson) => {
-                            this.type(JSON.stringify(outJson), this.unlock.bind(this));
-                        });
+                        var url = `https://mkusterer.de/api/?date=${datee}&country=${countryy}&plot=true`
+                        console.log(url)
+                        fetch(url)
+                            .then(res => res.json())
+                            .then((outJson) => {
+                                this.type(JSON.stringify(outJson.fig), this.unlock.bind(this));
+                            });
                     }
                     else {
                         this.type("Date is in the future. This functionality has not been implemented yet.", this.unlock.bind(this));
