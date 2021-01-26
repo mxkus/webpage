@@ -138,7 +138,7 @@ var main = (function () {
         HELP: { value: "help", help: configs.getInstance().help_help },
         CLEAR: { value: "clear", help: configs.getInstance().clear_help },
         REBOOT: { value: "reboot", help: configs.getInstance().reboot_help },
-        PREDICT: { value: "predict", help: configs.getInstance().classify_help },
+        PREDICT: { value: "predict", help: "see classify" },
         CLASSIFY: { value: "classify", help: configs.getInstance().classify_help },
     };
 
