@@ -374,7 +374,7 @@ var main = (function () {
                     console.log(url)
                     fetch(url)
                         .then((outJson) => {
-                            this.type(outJson, this.unlock.bind(this));
+                            this.type(JSON.stringify(outJson), this.unlock.bind(this));
                         });
                     }
                     else {
