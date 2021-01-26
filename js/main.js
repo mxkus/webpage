@@ -203,7 +203,7 @@ var main = (function () {
                 this.handleFill();
                 ignoreEvent(event);
             } else if ((event.which === 38 || event.keyCode === 38) && (document.getElementById("cmdline").value == "")) {
-                document.getElementById("cmdline") += lastCommand;
+                document.getElementById("cmdline").value += lastCommand;
                 ignoreEvent(event);
             }
         }.bind(this));
