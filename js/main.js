@@ -368,9 +368,9 @@ var main = (function () {
                     var split = cmdComponents.slice(1)
                     console.log(split)
                     let datee = split[1]
-                    let country = split[0]
+                    let countryy = split[0]
                     if (datee <= formatDate(new Date())) {
-                    var url = `https://mkusterer.de/api/?date=${datee}&country=${country}&plot=true`
+                    var url = `https://mkusterer.de/api/?date=${datee}&country=${countryy}&plot=true`
                     console.log(url)
                     fetch(url)
                         .then(res => res.json())
