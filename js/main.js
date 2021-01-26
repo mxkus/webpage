@@ -77,7 +77,7 @@ var files = (function () {
         }
     };
     Singleton.defaultOptions = {
-        "about.txt": "This website was made using only pure JavaScript with no extra libraries.\nThe base template is from: https://github.com/luisbraganca/fake-terminal-website/",
+        "about.txt": "The base website was made using only pure JavaScript with no extra libraries.\nThe base template is from: https://github.com/luisbraganca/fake-terminal-website/\nI added mobilenet from tensorflow JS and developed my own flask application for energy data queries.",
         "contact.txt": "maximilian.kusterer@gmail.com",
         "sports.txt": "Sports which I do on a regular basis:\nSummer: Beach volleyball, roundnet, mountainbiking, climbing outdoors, soccer\nWinter: Skiing, langlauf, climbing indoors, strength training",
         "books.txt": "Here's an uncomplete list of books which I enjoyed or am still enjoying:\nRobert Musil - Der Mann ohne Eigenschaften\nChimamanda Ngozi Adichie - Americanah\nGeorge Orwell - 1984\nAldous Huxley - Brave New World\nNoah Gordon - Der Medicus\nYuval Noah Harari - Eine kurze Geschichte der Menschheit\nDaniel Kehlmann - Die Vermessung der Welt\nHermann Hesse - Siddartha\nCixin Liu - Die drei Sonnen\n",
