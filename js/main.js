@@ -333,14 +333,15 @@ var main = (function () {
             case "energy":
                 var split = cmdComponents.slice(1)
                 console.log(split)
-                let date = split[0]
-                let country = split[1]
+                let date = split[1]
+                let country = split[0]
                 var url = `https://mkusterer.de/api/?date=${date}&country=${country}`
                 console.log(url)
                 fetch(url)
                     .then(res => res.json())
-                    .then((out) => {
-                        this.type(JSON.stringify(out), this.unlock.bind(this));
+                    .then((outJson) => {
+                        var outFormatted = Object.keys(outJson).map(key => key + ": " + outJson[key]).join("\n")
+                        this.type(outFormatted, this.unlock.bind(this));
                     });
                 break;
             case "maxi":
