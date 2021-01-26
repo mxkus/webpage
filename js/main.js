@@ -373,7 +373,6 @@ var main = (function () {
                     var url = `https://mkusterer.de/api/?date=${datee}&country=${countryy}&plot=true`
                     console.log(url)
                     fetch(url)
-                        .then(res => res.json())
                         .then((outJson) => {
                             var outFormatted = Object.keys(outJson).map(key => key + ": " + outJson[key]).join("\n")
                             this.type(outFormatted, this.unlock.bind(this));
