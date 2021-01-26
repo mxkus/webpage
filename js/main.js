@@ -364,6 +364,25 @@ var main = (function () {
                     this.type("Date is in the future. This functionality has not been implemented yet.", this.unlock.bind(this));
                 }
                 break;
+                case "energyplot":
+                    var split = cmdComponents.slice(1)
+                    console.log(split)
+                    let date = split[1]
+                    let country = split[0]
+                    if (date <= formatDate(new Date())) {
+                    var url = `https://mkusterer.de/api/?date=${date}&country=${country}&plot=true`
+                    console.log(url)
+                    fetch(url)
+                        .then(res => res.json())
+                        .then((outJson) => {
+                            var outFormatted = Object.keys(outJson).map(key => key + ": " + outJson[key]).join("\n")
+                            this.type(outFormatted, this.unlock.bind(this));
+                        });
+                    }
+                    else {
+                        this.type("Date is in the future. This functionality has not been implemented yet.", this.unlock.bind(this));
+                    }
+                    break;
             case "maxi":
                 this.type("Yep, that's me :-).", this.unlock.bind(this));
                 break;
