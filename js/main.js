@@ -229,6 +229,12 @@ var main = (function () {
                 return string.toUpperCase();
             }
         })();
+        var element = document.createElement("p");
+        Terminal.makeElementDisappear(element);
+        element.appendChild(document.createTextNode(capFirst("Documents")));
+        this.sidenav.appendChild(element);
+        this.sidenavElements.push(element);
+
         for (var file in files.getInstance()) {
             var element = document.createElement("button");
             Terminal.makeElementDisappear(element);
