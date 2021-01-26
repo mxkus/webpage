@@ -375,7 +375,7 @@ var main = (function () {
                         fetch(url)
                             .then(res => res.json())
                             .then((outJson) => {
-                                this.type(JSON.stringify(outJson.fig), this.unlock.bind(this));
+                                this.type(outJson.fig, this.unlock.bind(this));
                             });
                     }
                     else {
