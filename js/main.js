@@ -33,7 +33,7 @@ var configs = (function () {
         help_help: "Print this menu.",
         energy_help: "Get net energy production by typing 'energy COUNTRYCODE DATE', e.g. 'energy DE 20210101'",
         cv_help: "Print cv",
-        classify_help: "Classify an image with 'classify IMGURL' or 'predict IMGURL'",
+        classify_help: "Classify an image with 'classify' or 'predict', e.g. 'classify https://i.imgur.com/yrQjfxN.jpg'",
         clear_help: "Clear the terminal screen.",
         reboot_help: "Reboot the system.",
         welcome: "Welcome!\nType 'help' for a list of commands.\nIn order to skip text rolling, double click/touch anywhere.",
