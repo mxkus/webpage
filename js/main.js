@@ -447,7 +447,7 @@ var main = (function () {
 
     Terminal.prototype.classify = async function (cmdComponents) {
         try {
-            var imgSrc = (cmdComponents.length > 1) ? "https://cors-anywhere.herokuapp.com/" + cmdComponents[1] : "img/avatar.png"
+            var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "img/avatar.png"
             var image = document.createElement('img');
             image.src = imgSrc;
             image.id = "asdasd"
