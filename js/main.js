@@ -447,25 +447,28 @@ var main = (function () {
 
     Terminal.prototype.classify = async function (cmdComponents) {
         try {
-            var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "img/avatar.png"
-            var image = document.createElement('img');
-            image.src = imgSrc;
-            image.id = "asdasd"
-            image.style = "display: none";
-            image.crossOrigin = "anonymous";
-            document.body.appendChild(image);
+            var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "https://mkusterer.de/img/avatar.png"
+            //var image = document.createElement('img');
+            //image.src = imgSrc;
+            //image.id = "asdasd"
+            //image.style = "display: none";
+            //image.crossOrigin = "anonymous";
+            //document.body.appendChild(image);
 
-            const img = document.getElementById("asdasd")
+            //const img = document.getElementById("asdasd")
+            const img = await fetch("https://mkusterer.de/api/images?url=" + imgSrc).then(res => res.json())
+            const imgTensor = tf.tensor3d(img)
 
             // Load the model.
             const model = await mobilenet.load();
-            const predictions = await model.classify(img);
+            const predictions = await model.classify(imgTensor);
             console.log(predictions);
             const result = predictions.map(pred => pred.className.split(",")[0] + ": "+ pred.probability.toFixed(4)).join("\n");
-            document.body.removeChild(image);
+            //document.body.removeChild(image);
             this.type(result, this.unlock.bind(this))
         }
         catch (e) {
+            console.log(e)
             this.type("Sorry, this did not work :( probably, the image was blocked or not found. Hit F12 and navigate to the console if you want to know more about it.", this.unlock.bind(this))
         }
     };
