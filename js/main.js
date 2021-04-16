@@ -384,7 +384,7 @@ var main = (function () {
                 var date = split[1]
                 var country = split[0]
                 if (date <= formatDate(new Date())) {
-                var url = `https://mkusterer.de/api?date=${date}&country=${country}`
+                var url = `https://mkusterer.de/api/energy?date=${date}&country=${country}`
                 console.log(url)
                 fetch(url)
                     .then(res => res.json())
@@ -403,7 +403,7 @@ var main = (function () {
                     var date = split[1]
                     var country = split[0]
                     if (date <= formatDate(new Date())) {
-                        var url = `https://mkusterer.de/api?date=${date}&country=${country}&plot=true`
+                        var url = `https://mkusterer.de/api/energy?date=${date}&country=${country}&plot=true`
                         console.log(url)
                         fetch(url)
                             .then(res => res.json())
