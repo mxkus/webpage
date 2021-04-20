@@ -349,6 +349,7 @@ var main = (function () {
     };
 
     Terminal.prototype.handleCmd = async function () {
+
         var cmdComponents = this.cmdLine.value.trim().split(" ");
         lastCommand = this.cmdLine.value.trim()
         console.log(cmdComponents);
@@ -447,16 +448,21 @@ var main = (function () {
 
     Terminal.prototype.classify = async function (cmdComponents) {
         try {
+            // Load image
             var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "https://mkusterer.de/img/avatar.png"
-            //var image = document.createElement('img');
-            //image.src = imgSrc;
-            //image.id = "asdasd"
-            //image.style = "display: none";
-            //image.crossOrigin = "anonymous";
-            //document.body.appendChild(image);
-
-            //const img = document.getElementById("asdasd")
-            const img = await fetch("https://mkusterer.de/api/images?url=" + imgSrc).then(res => res.json())
+            console.log(imgSrc)   
+            const formBody = JSON.stringify({'imageBase64': imgSrc})
+            const img = await fetch('https://mkusterer.de/api/images_hook', {
+                            method: 'POST', 
+                            headers: {
+                               'Content-Type': 'application/json'
+                            },
+                            body: formBody,
+               }).then(res => res.json())
+            console.log(img)
+            console.log(img.length)
+            console.log(img[0].length)
+            console.log(img[0][0].length)
             const imgTensor = tf.tensor3d(img)
 
             // Load the model.
@@ -615,3 +621,24 @@ var main = (function () {
 })();
 
 window.onload = main.listener;
+document.onpaste = function (event) {
+    var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+    console.log(JSON.stringify(items)); // might give you mime types
+    for (var index in items) {
+        var item = items[index];
+        if (item.kind === 'file') {
+            var blob = item.getAsFile();
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                console.log(event.target.result); // data url!
+                const cmd = document.getElementById("cmdline")
+                if (event.target.result.length < 500000) {
+                    cmd.value += event.target.result
+                } else {
+                    cmd.value += "Pasted text/image is too large. You should try to copy the image URL and not directly paste images. (Bildadresse kopieren, NOT Bild kopieren)"
+                }
+            }; 
+            reader.readAsDataURL(blob);
+        }
+    }
+};
