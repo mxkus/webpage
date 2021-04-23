@@ -35,7 +35,7 @@ var configs = (function () {
         energy_help: "Get net energy production by typing 'energy COUNTRYCODE DATE', e.g. 'energy DE 20210101'",
         energyplot_help: "Get net energy production plotted by typing 'energyplot COUNTRYCODE DATE', e.g. 'energyplot DE 20210101'",
         translate_help: "Translate English text to German, e.g. 'translate hello, this is a test'",
-        translate_de_help: "Translate German text to English, e.g. 'translate hallo, das ist ein Test'",
+        translate_de_help: "Translate German text to English, e.g. 'übersetze hallo, das ist ein Test'",
         cv_help: "Print cv",
         classify_help: "Classify an image with 'classify' or 'predict', e.g. 'classify https://i.imgur.com/yrQjfxN.jpg'",
         clear_help: "Clear the terminal screen.",
