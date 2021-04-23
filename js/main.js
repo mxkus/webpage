@@ -422,6 +422,9 @@ var main = (function () {
             case "alina":
                 this.type("Blocked by DSGVO.", this.unlock.bind(this));
                 break;
+            case "translate":
+                this.translate(cmdComponents);
+                break;
             case cmds.LS.value:
                 this.ls();
                 break;
@@ -479,6 +482,20 @@ var main = (function () {
         }
     };
 
+    Terminal.prototype.translate = async function (cmdComponents) {
+            var translateText = cmdComponents.slice(1).join(" ")
+            const formBody = JSON.stringify({'translate_text': translateText})
+            const translation = await fetch('https://mkusterer.de/api/translate', {
+                            method: 'POST', 
+                            headers: {
+                               'Content-Type': 'application/json'
+                            },
+                            body: formBody,
+               }).then(res => res.json())
+            console.log(translation)
+            const result = JSON.stringify(translation["translations"][0]["text"]);
+            this.type(result, this.unlock.bind(this))
+    };
     Terminal.prototype.cat = function (cmdComponents) {
         var result;
         if (cmdComponents.length <= 1) {
