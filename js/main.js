@@ -34,6 +34,7 @@ var configs = (function () {
         help_help: "Print this menu.",
         energy_help: "Get net energy production by typing 'energy COUNTRYCODE DATE', e.g. 'energy DE 20210101'",
         energyplot_help: "Get net energy production plotted by typing 'energyplot COUNTRYCODE DATE', e.g. 'energyplot DE 20210101'",
+        translate_help: "Translate English text to German, e.g. 'translate hello, this is a test'",
         cv_help: "Print cv",
         classify_help: "Classify an image with 'classify' or 'predict', e.g. 'classify https://i.imgur.com/yrQjfxN.jpg'",
         clear_help: "Clear the terminal screen.",
@@ -144,6 +145,7 @@ var main = (function () {
         REBOOT: { value: "reboot", help: configs.getInstance().reboot_help },
         PREDICT: { value: "predict", help: "see classify" },
         CLASSIFY: { value: "classify", help: configs.getInstance().classify_help },
+        TRANSLATE: { value: "translate", help: configs.getInstance().translate_help },
     };
 
     var Terminal = function (prompt, cmdLine, output, sidenav, profilePic, user, host, root, outputTimer) {
