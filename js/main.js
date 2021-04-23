@@ -35,6 +35,7 @@ var configs = (function () {
         energy_help: "Get net energy production by typing 'energy COUNTRYCODE DATE', e.g. 'energy DE 20210101'",
         energyplot_help: "Get net energy production plotted by typing 'energyplot COUNTRYCODE DATE', e.g. 'energyplot DE 20210101'",
         translate_help: "Translate English text to German, e.g. 'translate hello, this is a test'",
+        translate_de_help: "Translate German text to English, e.g. 'translate hallo, das ist ein Test'",
         cv_help: "Print cv",
         classify_help: "Classify an image with 'classify' or 'predict', e.g. 'classify https://i.imgur.com/yrQjfxN.jpg'",
         clear_help: "Clear the terminal screen.",
@@ -146,6 +147,7 @@ var main = (function () {
         PREDICT: { value: "predict", help: "see classify" },
         CLASSIFY: { value: "classify", help: configs.getInstance().classify_help },
         TRANSLATE: { value: "translate", help: configs.getInstance().translate_help },
+        TRANSLATE_DE: { value: "übersetze", help: configs.getInstance().translate_de_help }
     };
 
     var Terminal = function (prompt, cmdLine, output, sidenav, profilePic, user, host, root, outputTimer) {
@@ -427,6 +429,9 @@ var main = (function () {
             case "translate":
                 this.translate(cmdComponents);
                 break;
+            case "übersetze":
+                this.translate(cmdComponents, "en");
+                break;
             case cmds.LS.value:
                 this.ls();
                 break;
@@ -484,9 +489,9 @@ var main = (function () {
         }
     };
 
-    Terminal.prototype.translate = async function (cmdComponents) {
+    Terminal.prototype.translate = async function (cmdComponents, targetLang="de") {
             var translateText = cmdComponents.slice(1).join(" ")
-            const formBody = JSON.stringify({'translate_text': translateText})
+            const formBody = JSON.stringify({'translate_text': translateText, 'target_lang': targetLang})
             const translation = await fetch('https://mkusterer.de/api/translate', {
                             method: 'POST', 
                             headers: {
