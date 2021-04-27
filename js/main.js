@@ -40,6 +40,7 @@ var configs = (function () {
         classify_help: "Classify an image with 'classify' or 'predict', e.g. 'classify https://i.imgur.com/yrQjfxN.jpg'",
         clear_help: "Clear the terminal screen.",
         reboot_help: "Reboot the system.",
+        merkel_help: "Ask a neural network questions about angela merkel. 'merkel Who is Angela Merkel?' But caution! It can take up to 45 seconds to answer!",
         welcome: "Welcome!\nType 'help' for a list of commands.\nIn order to skip text rolling, double click/touch anywhere.",
         internet_explorer_warning: "NOTE: I see you're using internet explorer, this website won't work properly.",
         welcome_file_name: "welcome_message.txt",
@@ -147,7 +148,8 @@ var main = (function () {
         PREDICT: { value: "predict", help: "see classify" },
         CLASSIFY: { value: "classify", help: configs.getInstance().classify_help },
         TRANSLATE: { value: "translate", help: configs.getInstance().translate_help },
-        TRANSLATE_DE: { value: "übersetze", help: configs.getInstance().translate_de_help }
+        TRANSLATE_DE: { value: "übersetze", help: configs.getInstance().translate_de_help },
+        MERKEL: { value: "merkel", help: configs.getInstance().merkel_help },
     };
 
     var Terminal = function (prompt, cmdLine, output, sidenav, profilePic, user, host, root, outputTimer) {
@@ -359,15 +361,6 @@ var main = (function () {
         console.log(cmdComponents);
         this.lock();
         switch (cmdComponents[0]) {
-            case "merkel":
-                var question = this.cmdLine.value.trim().split(" ").slice(1).join(" ")
-                var merkel = await fetch("/merkel.txt")
-                var text = await merkel.text()
-                var model = await qna.load()
-                var answers = await model.findAnswers(question, text);
-                console.log(answers)
-                this.type(JSON.stringify(answers), this.unlock.bind(this));
-                break;
             case cmds.CLASSIFY.value:
                 this.classify(cmdComponents);
                 break;
@@ -428,6 +421,9 @@ var main = (function () {
                 break;
             case "translate":
                 this.translate(cmdComponents);
+                break;
+            case "merkel":
+                this.merkel(cmdComponents);
                 break;
             case "übersetze":
                 this.translate(cmdComponents, "en");
@@ -501,6 +497,23 @@ var main = (function () {
                }).then(res => res.json())
             console.log(translation)
             const result = JSON.stringify(translation["translations"][0]["text"]);
+            this.type(result, this.unlock.bind(this))
+    };
+
+    Terminal.prototype.merkel = async function (cmdComponents) {
+            var merkelQuestion = cmdComponents.slice(1).join(" ")
+            console.log(merkelQuestion)
+            const formBody = JSON.stringify({'question': merkelQuestion})
+            this.type("Querying merkel API, this can take up to 45 seconds...")
+            const answer = await fetch('https://mkusterer.de/bert/bert', {
+                            method: 'POST', 
+                            headers: {
+                               'Content-Type': 'application/json'
+                            },
+                            body: formBody,
+               }).then(response => response.text())
+            console.log(answer)
+            const result = "\nResult: " + answer;
             this.type(result, this.unlock.bind(this))
     };
     Terminal.prototype.cat = function (cmdComponents) {
