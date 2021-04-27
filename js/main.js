@@ -10,9 +10,9 @@ function formatDate(date) {
         day = '' + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2) 
+    if (month.length < 2)
         month = '0' + month;
-    if (day.length < 2) 
+    if (day.length < 2)
         day = '0' + day;
 
     return [year, month, day].join('');
@@ -73,7 +73,7 @@ var configs = (function () {
 /**
  * Your files here
  */
-var otherSideNavElements = [{"name": "kugele-simulation.de", "url": "http://kugele-simulation.de"}]
+var otherSideNavElements = [{ "name": "kugele-simulation.de", "url": "http://kugele-simulation.de" }]
 var files = (function () {
     var instance;
     var Singleton = function (options) {
@@ -87,7 +87,8 @@ var files = (function () {
         "contact.txt": "maximilian.kusterer@gmail.com",
         "sports.txt": "Sports which I do on a regular basis:\nSummer: Beach volleyball, roundnet, mountainbiking, climbing outdoors, soccer\nWinter: Skiing, langlauf, climbing indoors, strength training",
         "books.txt": "Here's an uncomplete list of books which I enjoyed or am still enjoying:\nRobert Musil - Der Mann ohne Eigenschaften\nChimamanda Ngozi Adichie - Americanah\nGeorge Orwell - 1984\nAldous Huxley - Brave New World\nNoah Gordon - Der Medicus\nYuval Noah Harari - Eine kurze Geschichte der Menschheit\nDaniel Kehlmann - Die Vermessung der Welt\nHermann Hesse - Siddartha\nCixin Liu - Die drei Sonnen\nTiziano Terzani - Das Ende ist mein Anfang\nBernard Cornwell - Die Gral-Trilogie\nPaulo Coelho - Der Alchimist\nNathanael Rich - Losing Earth",
-        "cv.txt": 'Maximilian Kusterer\nmaximilian.kusterer@gmail.com\nwww.linkedin.com/in/mkusterer\n\nSports, programming, books, cooking, current affairs, shitty guitar\n\nProgramming languages: Python, Scala\n\n12/2020 – today\nEnBW AG, Karlsruhe\nData Engineer \n\n01/2018 – 11/2020\ndataqube GmbH, Karlsruhe\nData Scientist\n\n06/2017 – 11/2017\nTelecooperation Office (KIT), Karlsruhe\nResearch assistant for smart data analytics\n\n11/2013 – 07/2016\nFraunhofer ISI, Karlsruhe\nResearch assistant for energy technologies and systems'  };
+        "cv.txt": 'Maximilian Kusterer\nmaximilian.kusterer@gmail.com\nwww.linkedin.com/in/mkusterer\n\nSports, programming, books, cooking, current affairs, shitty guitar\n\nProgramming languages: Python, Scala\n\n12/2020 – today\nEnBW AG, Karlsruhe\nData Engineer \n\n01/2018 – 11/2020\ndataqube GmbH, Karlsruhe\nData Scientist\n\n06/2017 – 11/2017\nTelecooperation Office (KIT), Karlsruhe\nResearch assistant for smart data analytics\n\n11/2013 – 07/2016\nFraunhofer ISI, Karlsruhe\nResearch assistant for energy technologies and systems'
+    };
     return {
         getInstance: function (options) {
             instance === void 0 && (instance = new Singleton(options));
@@ -107,15 +108,15 @@ var main = (function () {
         event.preventDefault();
         event.stopPropagation();
     };
-    
+
     var scrollToBottom = function () {
         window.scrollTo(0, document.body.scrollHeight);
     };
-    
+
     var isURL = function (str) {
         return (str.startsWith("http") || str.startsWith("www")) && str.indexOf(" ") === -1 && str.indexOf("\n") === -1;
     };
-    
+
     /**
      * Model
      */
@@ -309,10 +310,10 @@ var main = (function () {
         this.sidenavElements.forEach(function (elem) {
             elem.disabled = false;
         });
-        
+
         this.focus();
         scrollToBottom();
-        
+
     };
 
     Terminal.prototype.handleFill = function () {
@@ -377,42 +378,11 @@ var main = (function () {
                 this.cat(["cat", "cv.txt"]);
                 break;
             case "energy":
-                var split = cmdComponents.slice(1)
-                console.log(split)
-                var date = split[1]
-                var country = split[0]
-                if (date <= formatDate(new Date())) {
-                var url = `https://mkusterer.de/api/energy?date=${date}&country=${country}`
-                console.log(url)
-                fetch(url)
-                    .then(res => res.json())
-                    .then((outJson) => {
-                        var outFormatted = Object.keys(outJson).map(key => key + ": " + outJson[key]).join("\n")
-                        this.type(outFormatted, this.unlock.bind(this));
-                    });
-                }
-                else {
-                    this.type("Date is in the future. This functionality has not been implemented yet.", this.unlock.bind(this));
-                }
+                this.energy(cmdComponents);
                 break;
-                case "energyplot":
-                    var split = cmdComponents.slice(1)
-                    console.log(split)
-                    var date = split[1]
-                    var country = split[0]
-                    if (date <= formatDate(new Date())) {
-                        var url = `https://mkusterer.de/api/energy?date=${date}&country=${country}&plot=true`
-                        console.log(url)
-                        fetch(url)
-                            .then(res => res.json())
-                            .then((outJson) => {
-                                this.type(outJson.fig.replace(/ /g, "\xa0"), this.unlock.bind(this));
-                            });
-                    }
-                    else {
-                        this.type("Date is in the future. This functionality has not been implemented yet.", this.unlock.bind(this));
-                    }
-                    break;
+            case "energyplot":
+                this.energyplot(cmdComponents);
+                break;
             case "maxi":
                 this.type("Yep, that's me :-).", this.unlock.bind(this));
                 break;
@@ -456,15 +426,15 @@ var main = (function () {
         try {
             // Load image
             var imgSrc = (cmdComponents.length > 1) ? cmdComponents[1] : "https://mkusterer.de/img/avatar.png"
-            console.log(imgSrc)   
-            const formBody = JSON.stringify({'imageBase64': imgSrc})
+            console.log(imgSrc)
+            const formBody = JSON.stringify({ 'imageBase64': imgSrc })
             const img = await fetch('https://mkusterer.de/api/images_hook', {
-                            method: 'POST', 
-                            headers: {
-                               'Content-Type': 'application/json'
-                            },
-                            body: formBody,
-               }).then(res => res.json())
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: formBody,
+            }).then(res => res.json())
             console.log(img)
             console.log(img.length)
             console.log(img[0].length)
@@ -475,7 +445,7 @@ var main = (function () {
             const model = await mobilenet.load();
             const predictions = await model.classify(imgTensor);
             console.log(predictions);
-            const result = predictions.map(pred => pred.className.split(",")[0] + ": "+ pred.probability.toFixed(4)).join("\n");
+            const result = predictions.map(pred => pred.className.split(",")[0] + ": " + pred.probability.toFixed(4)).join("\n");
             //document.body.removeChild(image);
             this.type(result, this.unlock.bind(this))
         }
@@ -485,36 +455,36 @@ var main = (function () {
         }
     };
 
-    Terminal.prototype.translate = async function (cmdComponents, targetLang="de") {
-            var translateText = cmdComponents.slice(1).join(" ")
-            const formBody = JSON.stringify({'translate_text': translateText, 'target_lang': targetLang})
-            const translation = await fetch('https://mkusterer.de/api/translate', {
-                            method: 'POST', 
-                            headers: {
-                               'Content-Type': 'application/json'
-                            },
-                            body: formBody,
-               }).then(res => res.json())
-            console.log(translation)
-            const result = JSON.stringify(translation["translations"][0]["text"]);
-            this.type(result, this.unlock.bind(this))
+    Terminal.prototype.translate = async function (cmdComponents, targetLang = "de") {
+        var translateText = cmdComponents.slice(1).join(" ")
+        const formBody = JSON.stringify({ 'translate_text': translateText, 'target_lang': targetLang })
+        const translation = await fetch('https://mkusterer.de/api/translate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: formBody,
+        }).then(res => res.json())
+        console.log(translation)
+        const result = JSON.stringify(translation["translations"][0]["text"]);
+        this.type(result, this.unlock.bind(this))
     };
 
     Terminal.prototype.merkel = async function (cmdComponents) {
-            var merkelQuestion = cmdComponents.slice(1).join(" ")
-            console.log(merkelQuestion)
-            const formBody = JSON.stringify({'question': merkelQuestion})
-            this.type("Querying merkel API, this can take up to 45 seconds...")
-            const answer = await fetch('https://mkusterer.de/bert/bert', {
-                            method: 'POST', 
-                            headers: {
-                               'Content-Type': 'application/json'
-                            },
-                            body: formBody,
-               }).then(response => response.text())
-            console.log(answer)
-            const result = "\nResult: " + answer;
-            this.type(result, this.unlock.bind(this))
+        var merkelQuestion = cmdComponents.slice(1).join(" ")
+        console.log(merkelQuestion)
+        const formBody = JSON.stringify({ 'question': merkelQuestion })
+        this.type("Querying merkel API, this can take up to 45 seconds...")
+        const answer = await fetch('https://mkusterer.de/bert/bert', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: formBody,
+        }).then(response => response.text())
+        console.log(answer)
+        const result = "\nResult: " + answer;
+        this.type(result, this.unlock.bind(this))
     };
     Terminal.prototype.cat = function (cmdComponents) {
         var result;
@@ -557,6 +527,45 @@ var main = (function () {
         this.type(result.trim(), this.unlock.bind(this));
     };
 
+    Terminal.prototype.energy = function (cmdComponents) {
+        var split = cmdComponents.slice(1)
+        console.log(split)
+        var date = split[1]
+        var country = split[0]
+        if (date <= formatDate(new Date())) {
+            var url = `https://mkusterer.de/api/energy?date=${date}&country=${country}`
+            console.log(url)
+            fetch(url)
+                .then(res => res.json())
+                .then((outJson) => {
+                    var outFormatted = Object.keys(outJson).map(key => key + ": " + outJson[key]).join("\n")
+                    this.type(outFormatted, this.unlock.bind(this));
+                });
+        }
+        else {
+            this.type("Date is in the future. This functionality has not been implemented yet.", this.unlock.bind(this));
+        }
+    }
+
+    Terminal.prototype.energyplot = function (cmdComponents) {
+        var split = cmdComponents.slice(1);
+        console.log(split);
+        var date = split[1];
+        var country = split[0];
+        if (date <= formatDate(new Date())) {
+            var url = `https://mkusterer.de/api/energy?date=${date}&country=${country}&plot=true`;
+            console.log(url);
+            fetch(url)
+                .then(res => res.json())
+                .then((outJson) => {
+                    this.type(outJson.fig.replace(/ /g, "\xa0"), this.unlock.bind(this));
+                });
+        }
+        else {
+            this.type("Date is in the future. This functionality has not been implemented yet.", this.unlock.bind(this));
+        }
+    }
+
     Terminal.prototype.clear = function () {
         this.output.textContent = "";
         this.prompt.textContent = "";
@@ -573,7 +582,7 @@ var main = (function () {
         this.output.textContent = "";
         this.prompt.textContent = "";
         if (this.typeSimulator) {
-            var result_string = (configs.getInstance().welcome  + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : ""));
+            var result_string = (configs.getInstance().welcome + (isUsingIE ? "\n" + configs.getInstance().internet_explorer_warning : ""));
             this.type(result_string, function () { this.unlock(); }.bind(this), false);
         }
     };
@@ -674,8 +683,10 @@ document.onpaste = function (event) {
                 } else {
                     cmd.value += "Pasted text/image is too large. You should try to copy the image URL and not directly paste images. (Bildadresse kopieren, NOT Bild kopieren)"
                 }
-            }; 
+            };
             reader.readAsDataURL(blob);
         }
     }
 };
+
+
