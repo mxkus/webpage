@@ -486,6 +486,7 @@ var main = (function () {
         const result = "\nResult: " + answer;
         this.type(result, this.unlock.bind(this))
     };
+    
     Terminal.prototype.cat = function (cmdComponents) {
         var result;
         if (cmdComponents.length <= 1) {
