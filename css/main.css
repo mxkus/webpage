@@ -101,18 +101,22 @@ body {
 }
 
 a:link {
+    color: #ffc3c2;
     text-decoration: none;
   }
   
   a:visited {
+    color: #ffc3c2;
     text-decoration: none;
   }
   
   a:hover {
+    color: #ffc3c2;
     text-decoration: none;
   }
   
   a:active {
+    color: #ffc3c2;
     text-decoration: none;
   }
 

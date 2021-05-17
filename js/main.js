@@ -398,6 +398,9 @@ var main = (function () {
             case "übersetze":
                 this.translate(cmdComponents, "en");
                 break;
+            case "corona":
+                this.corona();
+                break;
             case cmds.LS.value:
                 this.ls();
                 break;
@@ -571,6 +574,11 @@ var main = (function () {
         this.output.textContent = "";
         this.prompt.textContent = "";
         this.prompt.textContent = this.completePrompt;
+        this.unlock();
+    };
+
+    Terminal.prototype.corona = function () {
+        this.output.innerHTML += "It is not nice to display images in a terminal... but you can click this link to view the current corona data for Germany:<br><a href='https://mkusterer.de/corona.html' target='_blank'>Click here!</a>"
         this.unlock();
     };
 
