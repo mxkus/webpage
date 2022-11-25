@@ -83,6 +83,7 @@ var files = (function () {
         }
     };
     Singleton.defaultOptions = {
+        "credits.txt": "Based on https://github.com/luisbraganca/fake-terminal-website/",
         "about.txt": "The base website was made using only pure JavaScript with no extra libraries.\nThe base template is from: https://github.com/luisbraganca/fake-terminal-website/\nI added mobilenet from tensorflow JS and developed my own flask application for energy data queries.",
         "contact.txt": "maximilian.kusterer@gmail.com",
         "sports.txt": "Sports which I do on a regular basis:\nSummer: Beach volleyball, roundnet, mountainbiking, climbing outdoors, soccer\nWinter: Skiing, langlauf, climbing indoors, strength training",
